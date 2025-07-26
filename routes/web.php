@@ -17,7 +17,6 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create');
     Route::post('/productos', [ProductoController::class, 'store'])->name('admin.productos.store');
-    // Puedes agregar más rutas de administración aquí
 });
 
 Route::middleware('auth')->group(function () {

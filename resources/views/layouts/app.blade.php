@@ -29,7 +29,17 @@
             </a>
             <nav class="flex items-center space-x-10">
                 <a href="{{ url('/') }}" class="text-xl font-bold text-white px-4 py-2 transition relative after:content-[''] after:block after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left uppercase tracking-wide">Inicio</a>
+
                 <a href="{{ url('/productos') }}" class="text-xl font-semibold text-gray-200 px-4 py-2 transition relative after:content-[''] after:block after:h-0.5 after:bg-gray-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left hover:text-white uppercase tracking-wide">Productos</a>
+                @auth
+                    @if(auth()->user() && auth()->user()->name === '4zlo')
+                        <a href="{{ route('dashboard') }}" class="text-xl font-semibold text-green-400 hover:text-white px-4 py-2 transition uppercase tracking-wide bg-transparent border-none focus:outline-none">Nuevo producto</a>
+                    @endif
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="text-xl font-semibold text-red-400 hover:text-white px-4 py-2 transition uppercase tracking-wide bg-transparent border-none focus:outline-none">Cerrar sesión</button>
+                    </form>
+                @endauth
             </nav>
         </div>
     </nav>

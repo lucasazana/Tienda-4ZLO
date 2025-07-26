@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-8 text-center">Productos</h1>
+    <h1 class="text-3xl font-bold mb-8 text-center text-white">Productos</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         @foreach($productos as $producto)
             <div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">

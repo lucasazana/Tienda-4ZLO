@@ -5,7 +5,7 @@
     <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" class="w-full h-64 object-cover">
         <div class="p-6">
-            <h1 class="text-3xl font-bold mb-4">{{ $producto->nombre }}</h1>
+            <h1 class="text-3xl font-bold mb-4 text-white">{{ $producto->nombre }}</h1>
             <p class="text-gray-700 mb-4">{{ $producto->descripcion }}</p>
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
