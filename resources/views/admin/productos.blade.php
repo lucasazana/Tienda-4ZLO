@@ -1,0 +1,44 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="max-w-7xl mx-auto px-2 md:px-8 pt-12 pb-8">
+    <h2 class="text-2xl font-bold mb-6 text-white">Editar productos</h2>
+    <div class="overflow-x-auto rounded-xl border border-green-900 bg-black/90 shadow-lg">
+        <table class="admin-productos-table">
+            <thead class="admin-productos-thead">
+                <tr>
+                    <th class="admin-productos-th">Imagen</th>
+                    <th class="admin-productos-th">Nombre</th>
+                    <th class="admin-productos-th">Talla</th>
+                    <th class="admin-productos-th">Estado</th>
+                    <th class="admin-productos-th">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="admin-productos-row">
+                @foreach($productos as $producto)
+                    <tr>
+                        <td>
+                            <img src="{{ $producto->imagen_url }}" alt="{{ $producto->nombre }}" class="admin-productos-img">
+                        </td>
+                        <td class="admin-productos-nombre">{{ $producto->nombre }}</td>
+                        <td class="admin-productos-talla">{{ $producto->talla }}</td>
+                        <td>
+                            @if($producto->estado)
+                                <span class="admin-productos-estado admin-productos-estado-disponible">Disponible</span>
+                            @else
+                                <span class="admin-productos-estado admin-productos-estado-no">No disponible</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.productos.edit', $producto->id) }}" class="admin-productos-acciones">Editar</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="admin-productos-paginacion">
+        {{ $productos->onEachSide(1)->links('vendor.pagination.custom-dark') }}
+    </div>
+</div>
+@endsection

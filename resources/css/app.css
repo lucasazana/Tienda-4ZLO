@@ -1,3 +1,141 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* contenedor principal de la pagina productos */
+.contenedor-productos {
+    @apply w-full max-w-7xl mx-auto px-2 md:px-8 pt-12 pb-8 text-center flex flex-col items-center;
+}
+
+/* grid de productos */
+.productos-grid {
+    @apply w-full mb-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12 justify-center;
+}
+
+/* paginación de productos */
+.paginacion-productos {
+    @apply mt-8;
+}
+
+/* estilo del boton ver detalles de las cards */
+@layer components {
+    .btn-primary {
+    @apply w-full text-center bg-softgreen-500 text-black font-semibold py-2 rounded-lg transition-colors duration-200 shadow focus:outline-none focus:ring-2 focus:ring-softgreen-300 text-sm uppercase tracking-wider border border-transparent hover:bg-black hover:text-white hover:border-softgreen-900;
+    }
+}
+
+/* card del producto con fondo negro, borde suave y sombra personalizada */
+.card-producto {
+    @apply bg-black/90 border border-softgreen-700 rounded-2xl shadow-lg overflow-hidden flex flex-col transition-all duration-200 hover:shadow-2xl hover:border-softgreen-400 hover:shadow-card-hover;
+    will-change: transform;
+    min-width: 270px;
+    max-width: 340px;
+}
+
+/* borde inferior de la imagen en la card */
+.img-producto {
+    @apply h-60 w-full object-cover border-b border-softgreen-900 transition-transform duration-300 bg-gray-900;
+}
+
+/* titulo de producto */
+.titulo-producto {
+    @apply text-2xl font-black text-softgreen-400 mb-1 tracking-tight leading-tight;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* texto para la talla del producto */
+.talla-producto {
+    @apply text-xs text-softgreen-300;
+}
+.talla-producto-valor {
+    @apply text-sm font-semibold text-softgreen-400;
+}
+
+/* texto para el precio del producto */
+.precio-producto {
+    @apply block text-xl font-extrabold text-softgreen-400 tracking-tight;
+}
+
+/* sold out */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg) scale(1); }
+
+}
+
+/*----------------------------------------------------------------------------------------------------------*/
+
+/* tabla de editar productos para el admin */
+.admin-productos-table {
+    @apply min-w-full divide-y divide-green-900;
+}
+.admin-productos-thead {
+    @apply bg-green-950;
+}
+.admin-productos-th {
+    @apply px-6 py-3 text-left text-xs font-bold text-green-300 uppercase tracking-wider;
+}
+.admin-productos-row {
+    @apply bg-black divide-y divide-green-900;
+}
+.admin-productos-img {
+    @apply h-16 w-16 object-cover rounded-lg border border-gray-700;
+}
+.admin-productos-nombre {
+    @apply px-6 py-4 whitespace-nowrap text-green-400 font-semibold;
+}
+.admin-productos-talla {
+    @apply px-6 py-4 whitespace-nowrap text-green-300 font-bold;
+}
+.admin-productos-estado {
+    @apply inline-block px-3 py-1 text-xs font-bold rounded-full;
+}
+.admin-productos-estado-disponible {
+    @apply bg-green-500 text-black border border-green-400;
+}
+.admin-productos-estado-no {
+    @apply bg-red-500 text-black border border-red-400;
+}
+.admin-productos-acciones {
+    @apply inline-block bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded transition-all duration-200 text-xs;
+}
+.admin-productos-paginacion {
+    @apply mt-6 flex justify-center;
+}
+
+/*----------------------------------------------------------------------------------------------------------*/
+
+/* estilo para editar el formulario individual */
+.form-editar-producto {
+    @apply space-y-6 bg-black/90 p-8 rounded-xl border border-green-900 shadow-lg;
+}
+.form-editar-label {
+    @apply block text-green-300 font-semibold mb-1;
+}
+.form-editar-input, .form-editar-select, .form-editar-textarea {
+    @apply w-full bg-gray-900 text-green-200 border border-green-700 rounded px-4 py-2 focus:outline-none focus:border-green-400;
+}
+.form-editar-file {
+    @apply w-full text-green-200;
+}
+.form-editar-img-preview {
+    @apply mt-2 h-24 w-24 object-cover rounded border border-green-700;
+}
+.form-editar-btn {
+    @apply w-full bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded transition-all duration-200 uppercase tracking-widest border border-green-400;
+}
+.form-editar-title {
+    @apply text-2xl font-bold mb-8 text-green-400;
+}
+.form-editar-container {
+    @apply max-w-xl mx-auto py-12;
+}
+
+/*----------------------------------------------------------------------------------------------------------*/
+
+/*  Navbar blanco */
+.navbar-link-blanco {
+    @apply text-white hover:text-white transition px-4 py-2 text-xl font-semibold uppercase tracking-wide bg-transparent border-none focus:outline-none;
+}
+
+/*----------------------------------------------------------------------------------------------------------*/
+

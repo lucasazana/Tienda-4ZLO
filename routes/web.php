@@ -17,6 +17,12 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create');
     Route::post('/productos', [ProductoController::class, 'store'])->name('admin.productos.store');
+    Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit'])->name('admin.productos.edit');
+    Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('admin.productos.update');
+    Route::get('/productos-panel', function() {
+        $productos = \App\Models\Producto::orderByDesc('id')->paginate(7);
+        return view('admin.productos', compact('productos'));
+    })->name('admin.productos.panel');
 });
 
 Route::middleware('auth')->group(function () {
