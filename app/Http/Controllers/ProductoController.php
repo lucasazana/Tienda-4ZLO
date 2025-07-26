@@ -40,11 +40,10 @@ class ProductoController extends Controller
             'imagen' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        // Subir imagen a Cloudinary
+        // Subir imagen a Cloudinary y obtener versión webp
         $uploadedFileUrl = null;
         if ($request->hasFile('imagen')) {
             $uploadedFile = $request->file('imagen');
-            // Usando Cloudinary SDK
             $cloudinary = new \Cloudinary\Cloudinary([
                 'cloud' => [
                     'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
@@ -54,8 +53,15 @@ class ProductoController extends Controller
             ]);
             $result = $cloudinary->uploadApi()->upload($uploadedFile->getRealPath(), [
                 'folder' => 'productos',
+                'resource_type' => 'image',
             ]);
-            $uploadedFileUrl = $result['secure_url'] ?? null;
+            // Obtener la URL en webp usando transformación de Cloudinary
+            if (isset($result['public_id'])) {
+                $publicId = $result['public_id'];
+                $uploadedFileUrl = $cloudinary->image($publicId . '.webp')->toUrl();
+            } else {
+                $uploadedFileUrl = $result['secure_url'] ?? null;
+            }
         }
 
         $producto = Producto::create([
@@ -69,7 +75,7 @@ class ProductoController extends Controller
             'imagen_url' => $uploadedFileUrl,
         ]);
 
-        return redirect()->route('productos.show', $producto->id)
+        return redirect()->route('dashboard')
             ->with('success', 'Producto creado correctamente.');
     }
 
@@ -78,7 +84,7 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        //
+        return view('productos.detalle', compact('producto'));
     }
 
     /**

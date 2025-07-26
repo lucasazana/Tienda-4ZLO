@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="max-w-xl mx-auto py-12">
+    @if(session('success'))
+        <div class="mb-6 p-4 bg-green-600 text-white rounded shadow text-center font-bold">
+            {{ session('success') }}
+        </div>
+    @endif
     <h2 class="text-2xl font-bold mb-8 text-white">Agregar nuevo producto</h2>
     <form action="{{ route('admin.productos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-black/80 p-8 rounded-xl border border-gray-800 shadow-lg">
         @csrf
@@ -18,8 +23,8 @@
         </div>
 
         <div>
-            <label for="medidas" class="block text-gray-300 font-semibold mb-1">Medidas</label>
-            <input type="text" name="medidas" id="medidas" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2 focus:outline-none focus:border-white" required>
+            <label for="medida" class="block text-gray-300 font-semibold mb-1">Medidas</label>
+            <input type="text" name="medida" id="medida" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2 focus:outline-none focus:border-white" required>
         </div>
 
         <div>
@@ -37,6 +42,16 @@
         </div>
 
         <div>
+            <label for="categoria" class="block text-gray-300 font-semibold mb-1">Categoría</label>
+            <select name="categoria" id="categoria" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2 focus:outline-none focus:border-white" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="Pantalón">Pantalón</option>
+                <option value="Casacas">Casacas</option>
+                <option value="Polos">Polos</option>
+            </select>
+        </div>
+
+        <div>
             <label for="estado_ropa" class="block text-gray-300 font-semibold mb-1">Estado de la prenda</label>
             <input type="text" name="estado_ropa" id="estado_ropa" placeholder="Ej: 9/10" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2 focus:outline-none focus:border-white" required>
         </div>
@@ -49,8 +64,8 @@
         <div>
             <label for="estado" class="block text-gray-300 font-semibold mb-1">Estado</label>
             <select name="estado" id="estado" class="w-full bg-gray-900 text-white border border-gray-700 rounded px-4 py-2 focus:outline-none focus:border-white" required>
-                <option value="disponible">Disponible</option>
-                <option value="no">No disponible</option>
+                <option value="1">Disponible</option>
+                <option value="0">No disponible</option>
             </select>
         </div>
 

@@ -72,10 +72,10 @@
             </div>
             <div class="w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent mb-6"></div>
             <div class="text-gray-500 text-xs text-center tracking-wider select-none">
-                &copy; {{ date('Y') }} <span class="font-bold tracking-widest text-white">4ZLO</span>
-                <span class="mx-1 text-gray-700">|</span>
-                <span class="inline-block font-semibold text-gray-300 hover:text-white hover:underline cursor-pointer transition" title="ver portafolio" onclick="window.open('#', '_blank')">Xeya</span>
-                <span class="mx-1 text-gray-700">·</span>
+                &copy; {{ date('Y') }} <span class="font-bold tracking-widest">4ZLO</span>
+                <span class="mx-1">|</span>
+                <span class="inline-block font-semibold text-white hover:underline cursor-pointer transition" title="ver portafolio" onclick="window.open('#', '_blank')">Xeya</span>
+                <span class="mx-1">·</span>
                 Todos los derechos reservados.
             </div>
         </div>
@@ -84,5 +84,35 @@
     {{-- scripts de livewire y cierre --}}
     @vite(['resources/js/app.js'])
     @livewireScripts
+
+    <script>
+    document.querySelectorAll('.product-tilt-card').forEach(card => {
+        const tooltip = card.querySelector('.tooltip-product-card');
+        const img = card.querySelector('img');
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            const rotateX = (-y / (rect.height / 2)) * 10;
+            const rotateY = (x / (rect.width / 2)) * 10;
+            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
+            // Tooltip
+            if (tooltip && e.target === img) {
+                tooltip.style.opacity = 1;
+                tooltip.style.left = (e.clientX - rect.left) + 'px';
+                tooltip.style.top = (e.clientY - rect.top - 40) + 'px';
+            } else if (tooltip) {
+                tooltip.style.opacity = 0;
+            }
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+            if (tooltip) tooltip.style.opacity = 0;
+        });
+        card.addEventListener('mouseenter', () => {
+            card.style.transition = 'transform 0.2s cubic-bezier(.25,.8,.25,1)';
+        });
+    });
+    </script>
 </body>
 </html>
