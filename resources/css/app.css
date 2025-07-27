@@ -221,3 +221,87 @@
     transition: all 0.2s;
 }
 
+/* Custom tracking for tightest letter spacing */
+.tracking-tightest {
+    letter-spacing: 0.02em;
+}
+
+/* Rajdhani font utility */
+.font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/*---------------------------------------------------------------------------------------------------------*/
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 12px;
+    background: #181818;
+}
+::-webkit-scrollbar-thumb {
+    background: #2e2e2e;
+    border-radius: 8px;
+    border: 2px solid #181818;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+}
+::-webkit-scrollbar-corner {
+    background: #181818;
+}
+html {
+    scroll-behavior: smooth;
+    scrollbar-color: #2e2e2e #181818;
+    scrollbar-width: thin;
+}
+
+/* Animación de desvanecimiento para las imágenes del carrusel */
+.carousel-fade {
+  animation: carouselFade 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes carouselFade {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Animaciones de slide para las miniaturas del carrusel al cambiar con flechas */
+.carousel-thumb {
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.carousel-thumb.slide-left {
+  animation: slideLeftThumb 0.4s;
+}
+.carousel-thumb.slide-right {
+  animation: slideRightThumb 0.4s;
+}
+@keyframes slideLeftThumb {
+  0% {
+    transform: translateX(40px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideRightThumb {
+  0% {
+    transform: translateX(-40px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#lightbox-modal {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

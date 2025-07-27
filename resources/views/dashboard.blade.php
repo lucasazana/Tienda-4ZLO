@@ -82,46 +82,6 @@
         </div>
     </form>
 
-    // script para enviar el formulario por ajax y mostrar mensaje de éxito
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('producto-form');
-        const successDiv = document.getElementById('success-message');
-        const errorDiv = document.getElementById('error-message');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            errorDiv.classList.add('hidden');
-            errorDiv.textContent = '';
-            const formData = new FormData(form);
-            fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
-                },
-                body: formData
-            })
-            .then(async response => {
-                const data = await response.json();
-                if (response.status === 422 && data.errors) {
-                    let errorList = Object.values(data.errors).flat().join('\n');
-                    errorDiv.textContent = errorList;
-                    errorDiv.classList.remove('hidden');
-                } else if (data.success) {
-                    form.reset();
-                    successDiv.textContent = data.message;
-                    successDiv.classList.remove('hidden');
-                    setTimeout(() => {
-                        successDiv.classList.add('hidden');
-                    }, 4000);
-                }
-            })
-            .catch(() => {
-                errorDiv.textContent = 'Ocurrió un error al guardar el producto.';
-                errorDiv.classList.remove('hidden');
-            });
-        });
-    });
-    </script>
+    {{-- JS centralizado en resources/js/app.js --}}
 </div>
 @endsection

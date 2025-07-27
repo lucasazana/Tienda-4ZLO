@@ -4,10 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }} | Ropa vintage 90s y streetwear</title>
-    <meta name="description" content="Tienda online de ropa americana vintage y streetwear. Encuentra prendas únicas de los 90's, originales y en tendencia.">
-    <meta name="keywords" content="ropa vintage, streetwear, 90s, tienda online, americana, moda retro, 4zlo, peru, ropa ancha, y2k, xeya">
+    <title>@yield('title', '4ZLO | Ropa vintage, streetwear y prendas únicas en Perú')</title>
+    <meta name="description" content="@yield('meta_description', 'Descubre 4ZLO: tu tienda online de ropa vintage, streetwear y prendas originales de los 90s. Envíos a todo el Perú. Renueva tu estilo con piezas únicas, auténticas y en tendencia. ¡Exprésate con moda retro y urbana!')">
+    <meta name="keywords" content="ropa vintage, streetwear, 90s, tienda online, americana, moda retro, 4zlo, peru, ropa ancha, y2k, xeya, prendas únicas, moda urbana, tendencia, originales, retro, oversize, sudaderas, cortavientos, casacas, polos, moda joven, moda alternativa">
     <link rel="canonical" href="{{ url()->current() }}" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="@yield('og_title', '4ZLO | Ropa vintage, streetwear y prendas únicas en Perú')" />
+    <meta property="og:description" content="@yield('og_description', 'Descubre la mejor selección de ropa vintage y streetwear en 4ZLO. Prendas originales, únicas y en tendencia para destacar tu estilo en Perú.')" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="@yield('og_image', asset('img/logo.webp'))" />
     <link rel="icon" type="image/x-icon" href="{{ asset('img/icon.ico') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +25,11 @@
 </head>
 
 {{-- fondo negro y fuente definida --}}
-<body class="antialiased bg-black flex flex-col min-h-screen" style="font-family: 'Rajdhani', sans-serif;">
+<body class="antialiased bg-black flex flex-col min-h-screen font-rajdhani">
 
-    {{-- navbar, logo y links --}}
-    <nav class="bg-black shadow mb-8 mt-8">
-        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center mt-4 rounded-xl bg-black/95 shadow-lg border border-softgreen-700">
+    {{-- navbar fijo con fondo borroso --}}
+    <nav id="main-navbar" class="sticky top-0 z-50 bg-black/70 backdrop-blur-x1 shadow mt-10">
+        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center rounded-xl bg-black/70 shadow-lg border border-softgreen-700">
             <a href="{{ url('/') }}" class="flex items-center">
                 <img src="{{ asset('img/logo.webp') }}" alt="logo de 4zlo tienda vintage y streetwear" class="h-16 w-auto filter grayscale-0 contrast-200 brightness-110 drop-shadow-md" loading="lazy">
             </a>
@@ -56,7 +62,7 @@
     <footer class="bg-black mt-24 border-t border-softgreen-700 shadow-inner">
         <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
             <div class="flex space-x-7 mb-6">
-                <a href="https://wa.me/51936137641" target="_blank" class="group text-softgreen-400 hover:text-softgreen-300 text-2xl transition-all duration-200" aria-label="WhatsApp">
+                <a href="https://wa.me/51934329514" target="_blank" class="group text-softgreen-400 hover:text-softgreen-300 text-2xl transition-all duration-200" aria-label="WhatsApp">
                     <span class="inline-block bg-softgreen-900/60 rounded-full p-3 group-hover:bg-softgreen-400/20 transition-all duration-200">
                         <i class="fab fa-whatsapp"></i>
                     </span>
@@ -84,37 +90,9 @@
     </footer>
 
     {{-- scripts de livewire y cierre --}}
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js'], true)
     @livewireScripts
 
-    <script>
-    document.querySelectorAll('.product-tilt-card').forEach(card => {
-        const tooltip = card.querySelector('.tooltip-product-card');
-        const img = card.querySelector('img');
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            const rotateX = (-y / (rect.height / 2)) * 10;
-            const rotateY = (x / (rect.width / 2)) * 10;
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
-            // Tooltip
-            if (tooltip && e.target === img) {
-                tooltip.style.opacity = 1;
-                tooltip.style.left = (e.clientX - rect.left) + 'px';
-                tooltip.style.top = (e.clientY - rect.top - 40) + 'px';
-            } else if (tooltip) {
-                tooltip.style.opacity = 0;
-            }
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
-            if (tooltip) tooltip.style.opacity = 0;
-        });
-        card.addEventListener('mouseenter', () => {
-            card.style.transition = 'transform 0.2s cubic-bezier(.25,.8,.25,1)';
-        });
-    });
-    </script>
+    {{-- JS centralizado en resources/js/app.js --}}
 </body>
 </html>

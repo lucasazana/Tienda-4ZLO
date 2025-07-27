@@ -1,3 +1,9 @@
+
+@section('title', 'Panel de administración | 4ZLO')
+@section('meta_description', 'Administra el catálogo de productos de 4ZLO: agrega, edita o elimina prendas vintage y streetwear de manera segura y eficiente.')
+@section('og_title', 'Panel de administración | 4ZLO')
+@section('og_description', 'Panel privado para la gestión de productos en 4ZLO. Solo para administradores.')
+@section('og_image', asset('img/logo.webp'))
 @extends('layouts.app')
 
 @section('content')
@@ -31,10 +37,10 @@
                         </td>
                         <td>
                             <a href="{{ route('admin.productos.edit', $producto->id) }}" class="admin-productos-acciones">Editar</a>
-                            <form action="{{ route('admin.productos.destroy', $producto->id) }}" method="POST" style="display:inline-block; margin-left:8px;" class="form-eliminar-producto">
+                            <form action="{{ route('admin.productos.destroy', $producto->id) }}" method="POST" class="form-eliminar-producto inline-block ml-2">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="bg-red-600 hover:bg-red-700 text-black font-bold py-2 px-4 rounded transition-all duration-200 text-xs btn-eliminar" style="margin-left:0;">Eliminar</button>
+                                <button type="button" class="bg-red-600 hover:bg-red-700 text-black font-bold py-2 px-4 rounded transition-all duration-200 text-xs btn-eliminar ml-0">Eliminar</button>
                             </form>
 
                         </td>
