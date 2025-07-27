@@ -23,7 +23,7 @@
 
     {{-- navbar, logo y links --}}
     <nav class="bg-black shadow mb-8 mt-8">
-        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center mt-4 rounded-xl bg-black/95 shadow-lg border border-gray-900">
+        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center mt-4 rounded-xl bg-black/95 shadow-lg border border-softgreen-700">
             <a href="{{ url('/') }}" class="flex items-center">
                 <img src="{{ asset('img/logo.webp') }}" alt="logo de 4zlo tienda vintage y streetwear" class="h-16 w-auto filter grayscale-0 contrast-200 brightness-110 drop-shadow-md" loading="lazy">
             </a>
@@ -52,8 +52,8 @@
         @yield('content')
     </main>
 
-    {{-- footer profesional y minimalista --}}
-    <footer class="bg-black mt-24 border-t border-gray-800/80 shadow-inner">
+    {{-- footer --}}
+    <footer class="bg-black mt-24 border-t border-softgreen-700 shadow-inner">
         <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
             <div class="flex space-x-7 mb-6">
                 <a href="https://wa.me/51936137641" target="_blank" class="group text-softgreen-400 hover:text-softgreen-300 text-2xl transition-all duration-200" aria-label="WhatsApp">
@@ -72,11 +72,11 @@
                     </span>
                 </a>
             </div>
-            <div class="w-full h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent mb-6"></div>
-            <div class="text-gray-500 text-xs text-center tracking-wider select-none">
-                &copy; {{ date('Y') }} <span class="font-bold tracking-widest text-softgreen-400">4ZLO</span>
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-softgreen-800 to-transparent mb-6"></div>
+            <div class="text-softgreen-400 text-xs text-center tracking-wider select-none">
+                &copy; 2025 4ZLO
                 <span class="mx-1 text-softgreen-700">|</span>
-                <span class="inline-block font-semibold text-softgreen-400 hover:underline cursor-pointer transition" title="ver portafolio" onclick="window.open('#', '_blank')">Xeya</span>
+                <span class="inline-block font-bold text-softgreen-500 hover:underline cursor-pointer transition" title="ver portafolio" onclick="window.open('#', '_blank')">Xeya</span>
                 <span class="mx-1 text-softgreen-700">·</span>
                 Todos los derechos reservados.
             </div>

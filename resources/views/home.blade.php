@@ -1,22 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w-full max-w-7xl mx-auto px-2 md:px-8 pt-2 pb-8 text-center flex flex-col items-center">
-    <h1 class="text-5xl md:text-6xl font-black mb-7 text-white tracking-tight leading-tight" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.03em;">
-        BIENVENIDO A LOS 90'S
-    </h1>
-    <p class="text-lg md:text-xl text-gray-300 mb-10 font-medium max-w-xl">
-        <span class="font-bold text-white">Tienda online</span> de ropa americana vintage &amp; streetwear.<br>
-        <span class="text-gray-500 text-base font-normal">Prendas únicas, originales y en tendencia.</span>
-    </p>
-    <div class="w-full mb-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12 justify-center">
+<div class="w-full flex flex-col items-center pt-2 pb-8">
+    <div class="w-full max-w-7xl px-2 md:px-8 flex flex-col items-center justify-center mt-12 mb-10">
+        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-6" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.02em;">
+            4ZLO
+        </h1>
+        <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-8 md:ml-20">
+            <span class="text-sm md:text-base text-softgreen-400 font-medium uppercase">Envíos a todo el Perú</span>
+            <span class="hidden md:inline text-softgreen-700 text-lg">|</span>
+            <span class="text-sm md:text-base text-softgreen-400 font-medium uppercase">Nuevos ingresos cada semana</span>
+        </div>
+        <div class="w-full max-w-xs md:max-w-4xl h-px bg-gradient-to-r from-transparent via-softgreen-800 to-transparent mb-8"></div>
+        <p class="text-base md:text-lg text-gray-300 font-medium max-w-xl mb-4">
+            <span class="font-bold text-white">Tienda online</span> de ropa americana vintage &amp; streetwear.<br>
+            <span class="text-softgreen-400 text-sm font-normal md:ml-24">Prendas únicas, originales y en tendencia.</span>
+        </p>
+        <p class="text-base md:text-lg font-bold text-softgreen-500 uppercase tracking-wide mt-6 mb-4">
+            Mira lo que tenemos de nuevo
+        </p>
+    </div>
+    <div class="w-full max-w-7xl mx-auto mb-8">
+        <div class="productos-grid mx-auto">
             @foreach($productos->take(8) as $producto)
                 <x-product-card :producto="$producto" />
             @endforeach
         </div>
     </div>
-    <a href="{{ route('productos.index') }}" class="inline-block mt-6 bg-white/5 border border-gray-800 text-white font-semibold py-3 px-8 rounded-full shadow hover:bg-white/10 hover:border-white transition-all duration-200 tracking-widest uppercase text-base focus:outline-none focus:ring-2 focus:ring-white/30">
+    <a href="{{ route('productos.index') }}" class="inline-block mt-6 bg-black/90 border border-softgreen-700 text-softgreen-400 font-extrabold py-3 px-8 rounded-2xl shadow-lg hover:bg-softgreen-500 hover:text-black hover:border-softgreen-400 transition-all duration-200 tracking-widest uppercase text-base focus:outline-none focus:ring-2 focus:ring-softgreen-300">
         Ver más productos
     </a>
 </div>

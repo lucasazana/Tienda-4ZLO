@@ -21,7 +21,9 @@ class ProductoController extends Controller
                                 ->orWhere('no_disponible_desde', '>', now()->subDay());
                         });
                 });
-        })->get();
+        })
+        ->inRandomOrder()
+        ->paginate(12); // 3 filas de 4 productos
         return view('productos.index', compact('productos'));
     }
 
@@ -117,7 +119,12 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        return view('productos.detalle', compact('producto'));
+        $randomProductos = Producto::where('id', '!=', $producto->id)
+            ->where('estado', 1)
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
+        return view('productos.detalle', compact('producto', 'randomProductos'));
     }
 
     /**

@@ -18,4 +18,9 @@ class Producto extends Model
         'imagen_url',
         'no_disponible_desde',
     ];
+
+    public function imagenes()
+    {
+        return $this->hasMany(\App\Models\Imagen::class);
+    }
 }
