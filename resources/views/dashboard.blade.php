@@ -10,6 +10,7 @@
     @endif
     <h2 class="text-2xl font-bold mb-8 text-green-400">Agregar nuevo producto</h2>
     <div id="success-message" class="mb-6 p-4 bg-green-500 text-black rounded shadow text-center font-bold border border-green-400 hidden"></div>
+    <div id="error-message" class="mb-6 p-4 bg-red-500 text-black rounded shadow text-center font-bold border border-red-400 hidden"></div>
     <form id="producto-form" action="{{ route('admin.productos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-black/90 p-8 rounded-xl border border-green-900 shadow-lg">
         @csrf
 
@@ -71,20 +72,26 @@
         </div>
 
         <div>
-            <label for="imagen" class="block text-green-300 font-semibold mb-1">Imagen</label>
-            <input type="file" name="imagen" id="imagen" accept="image/*" class="w-full text-green-200" required>
+            <label for="imagenes" class="block text-green-300 font-semibold mb-1">Imágenes</label>
+            <input type="file" name="imagenes[]" id="imagenes" accept="image/*" class="w-full text-green-200" multiple required>
+            <small class="text-green-500">Puedes seleccionar varias imagenes. La primera sera la principal.</small>
         </div>
 
         <div class="pt-4">
             <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded transition-all duration-200 uppercase tracking-widest border border-green-400">Publicar producto</button>
         </div>
     </form>
+
+    // script para enviar el formulario por ajax y mostrar mensaje de éxito
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('producto-form');
         const successDiv = document.getElementById('success-message');
+        const errorDiv = document.getElementById('error-message');
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            errorDiv.classList.add('hidden');
+            errorDiv.textContent = '';
             const formData = new FormData(form);
             fetch(form.action, {
                 method: 'POST',
@@ -94,9 +101,13 @@
                 },
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
+            .then(async response => {
+                const data = await response.json();
+                if (response.status === 422 && data.errors) {
+                    let errorList = Object.values(data.errors).flat().join('\n');
+                    errorDiv.textContent = errorList;
+                    errorDiv.classList.remove('hidden');
+                } else if (data.success) {
                     form.reset();
                     successDiv.textContent = data.message;
                     successDiv.classList.remove('hidden');
@@ -106,7 +117,8 @@
                 }
             })
             .catch(() => {
-                alert('Ocurrió un error al guardar el producto.');
+                errorDiv.textContent = 'Ocurrió un error al guardar el producto.';
+                errorDiv.classList.remove('hidden');
             });
         });
     });

@@ -14,13 +14,13 @@ class ProductoController extends Controller
     {
         $productos = Producto::where(function($q) {
             $q->where('estado', 1)
-              ->orWhere(function($q2) {
-                  $q2->where('estado', 0)
-                      ->where(function($q3) {
-                          $q3->whereNull('no_disponible_desde')
-                              ->orWhere('no_disponible_desde', '>', now()->subDay());
-                      });
-              });
+                ->orWhere(function($q2) {
+                    $q2->where('estado', 0)
+                        ->where(function($q3) {
+                            $q3->whereNull('no_disponible_desde')
+                                ->orWhere('no_disponible_desde', '>', now()->subDay());
+                        });
+                });
         })->get();
         return view('productos.index', compact('productos'));
     }
@@ -38,39 +38,24 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validator = \Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'medida' => 'required|string|max:255',
             'talla' => 'required|string|max:255',
+            'categoria' => 'required|string|max:255',
             'estado_ropa' => 'required|string|max:255',
             'precio' => 'required|numeric',
             'estado' => 'required|boolean',
-            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'imagenes' => 'required',
+            'imagenes.*' => 'image|mimes:jpeg,png,jpg,gif,webp',
         ]);
-
-        // Subir imagen a Cloudinary y obtener versión webp
-        $uploadedFileUrl = null;
-        if ($request->hasFile('imagen')) {
-            $uploadedFile = $request->file('imagen');
-            $cloudinary = new \Cloudinary\Cloudinary([
-                'cloud' => [
-                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
-                    'api_key'    => env('CLOUDINARY_API_KEY'),
-                    'api_secret' => env('CLOUDINARY_API_SECRET'),
-                ],
-            ]);
-            $result = $cloudinary->uploadApi()->upload($uploadedFile->getRealPath(), [
-                'folder' => 'productos',
-                'resource_type' => 'image',
-            ]);
-            // Obtener la URL en webp usando transformación de Cloudinary
-            if (isset($result['public_id'])) {
-                $publicId = $result['public_id'];
-                $uploadedFileUrl = $cloudinary->image($publicId . '.webp')->toUrl();
-            } else {
-                $uploadedFileUrl = $result['secure_url'] ?? null;
+        if ($validator->fails()) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
             }
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         $producto = Producto::create([
@@ -78,11 +63,45 @@ class ProductoController extends Controller
             'descripcion' => $request->descripcion,
             'medida' => $request->medida,
             'talla' => $request->talla,
+            'categoria' => $request->categoria,
             'estado_ropa' => $request->estado_ropa,
             'precio' => $request->precio,
             'estado' => $request->estado,
-            'imagen_url' => $uploadedFileUrl,
+            // imagen_url se asignará después de subir la primera imagen
         ]);
+
+        $imagenesUrls = [];
+        if ($request->hasFile('imagenes')) {
+            $cloudinary = new \Cloudinary\Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+            foreach ($request->file('imagenes') as $i => $uploadedFile) {
+                $result = $cloudinary->uploadApi()->upload($uploadedFile->getRealPath(), [
+                    'folder' => 'productos',
+                    'resource_type' => 'image',
+                ]);
+                if (isset($result['public_id'])) {
+                    $publicId = $result['public_id'];
+                    $url = $cloudinary->image($publicId . '.webp')->toUrl();
+                } else {
+                    $url = $result['secure_url'] ?? null;
+                }
+                $imagenesUrls[] = $url;
+                $producto->imagenes()->create([
+                    'url' => $url,
+                    'orden' => $i,
+                ]);
+            }
+            // Guardar la primera imagen como principal en el campo imagen_url
+            if (count($imagenesUrls) > 0) {
+                $producto->imagen_url = $imagenesUrls[0];
+                $producto->save();
+            }
+        }
 
         // Si la petición es AJAX, devolver JSON
         if ($request->ajax()) {
@@ -170,6 +189,12 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        // Eliminar imágenes asociadas en la base de datos
+        if (method_exists($producto, 'imagenes')) {
+            $producto->imagenes()->delete();
+        }
+        // Eliminar el producto
+        $producto->delete();
+        return redirect()->route('admin.productos.panel')->with('success', 'Producto eliminado correctamente.');
     }
 }

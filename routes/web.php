@@ -19,6 +19,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::post('/productos', [ProductoController::class, 'store'])->name('admin.productos.store');
     Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit'])->name('admin.productos.edit');
     Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('admin.productos.update');
+    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('admin.productos.destroy');
     Route::get('/productos-panel', function() {
         $productos = \App\Models\Producto::orderByDesc('id')->paginate(7);
         return view('admin.productos', compact('productos'));

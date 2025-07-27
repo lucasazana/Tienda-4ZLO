@@ -31,6 +31,12 @@
                         </td>
                         <td>
                             <a href="{{ route('admin.productos.edit', $producto->id) }}" class="admin-productos-acciones">Editar</a>
+                            <form action="{{ route('admin.productos.destroy', $producto->id) }}" method="POST" style="display:inline-block; margin-left:8px;" class="form-eliminar-producto">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="bg-red-600 hover:bg-red-700 text-black font-bold py-2 px-4 rounded transition-all duration-200 text-xs btn-eliminar" style="margin-left:0;">Eliminar</button>
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach

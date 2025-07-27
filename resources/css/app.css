@@ -56,12 +56,6 @@
     @apply block text-xl font-extrabold text-softgreen-400 tracking-tight;
 }
 
-/* sold out */
-@keyframes wiggle {
-    0%, 100% { transform: rotate(-3deg) scale(1); }
-
-}
-
 /*----------------------------------------------------------------------------------------------------------*/
 
 /* tabla de editar productos para el admin */
@@ -139,3 +133,58 @@
 
 /*----------------------------------------------------------------------------------------------------------*/
 
+/* modal de confirmacion al eliminar algun producto para el admin */
+.modal-eliminar-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-eliminar-box {
+    background: #181c1f;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px #000;
+    max-width: 90vw;
+    min-width: 320px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal-eliminar-titulo {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.modal-eliminar-nombre {
+    color: #f87171;
+}
+.modal-eliminar-botones {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+.modal-eliminar-cancelar {
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.3rem;
+    background: #eee;
+    color: #222;
+    font-weight: bold;
+    border: none;
+}
+.modal-eliminar-confirmar {
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.3rem;
+    background: #f87171;
+    color: #222;
+    font-weight: bold;
+    border: none;
+}
