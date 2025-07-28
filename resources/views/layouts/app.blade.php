@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if(!empty($noindex))
+        <meta name="robots" content="noindex, nofollow">
+    @endif
     <title>@yield('title', '4ZLO | Ropa vintage, streetwear y prendas únicas en Perú')</title>
     <meta name="description" content="@yield('meta_description', 'Descubre 4ZLO: tu tienda online de ropa vintage, streetwear y prendas originales de los 90s. Envíos a todo el Perú. Renueva tu estilo con piezas únicas, auténticas y en tendencia. ¡Exprésate con moda retro y urbana!')">
     <meta name="keywords" content="ropa vintage, streetwear, 90s, tienda online, americana, moda retro, 4zlo, peru, ropa ancha, y2k, xeya, prendas únicas, moda urbana, tendencia, originales, retro, oversize, sudaderas, cortavientos, casacas, polos, moda joven, moda alternativa">

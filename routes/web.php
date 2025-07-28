@@ -10,11 +10,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('jaal-4zlo-panel')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
     Route::get('/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create');
     Route::post('/productos', [ProductoController::class, 'store'])->name('admin.productos.store');
     Route::get('/productos/{producto}/edit', [ProductoController::class, 'edit'])->name('admin.productos.edit');

@@ -12,10 +12,12 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
+        $adminUser = env('ADMIN_USER', 'admin');
+        $adminPass = env('ADMIN_PASS', 'password');
         \App\Models\User::updateOrCreate(
-            ['name' => '4zlo'],
+            ['name' => $adminUser],
             [
-                'password' => bcrypt('josue4zloadmin'),
+                'password' => bcrypt($adminPass),
             ]
         );
     }

@@ -32,7 +32,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard');
     }
 
     /**
