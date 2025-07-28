@@ -7,14 +7,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="contenedor-productos">
-        <div class="productos-grid">
+    <div class="w-full max-w-7xl mx-auto px-2 md:px-8 pt-12 pb-8 text-center flex flex-col items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @foreach($productos as $producto)
                 <x-product-card :producto="$producto" />
             @endforeach
         </div>
         @if(method_exists($productos, 'links'))
-        <div class="paginacion-productos">
+        <div class="mt-8">
             {{ $productos->links('vendor.pagination.custom-dark') }}
         </div>
         @endif

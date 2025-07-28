@@ -1,10 +1,25 @@
-// Confirmación de eliminación de productos (solo admin)
+
+// Confirmación de eliminación de productos solo admin
 document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.form-eliminar-producto')) {
         document.querySelectorAll('.btn-eliminar').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 const form = btn.closest('form');
-                const nombre = form.closest('tr').querySelector('.admin-productos-nombre').textContent.trim();
+                let nombre = '';
+                // Desktop: buscar en la fila de la tabla
+                const tr = form.closest('tr');
+                if (tr && tr.querySelector('.admin-productos-nombre')) {
+                    nombre = tr.querySelector('.admin-productos-nombre').textContent.trim();
+                } else {
+                    // Mobile: buscar en la tarjeta
+                    const card = form.closest('.flex.flex-col.bg-black');
+                    if (card) {
+                        const nombreDiv = card.querySelector('.text-green-400');
+                        if (nombreDiv) {
+                            nombre = nombreDiv.textContent.trim();
+                        }
+                    }
+                }
                 mostrarModalEliminar(form, nombre);
             });
         });
@@ -40,7 +55,7 @@ function mostrarModalEliminar(form, nombre) {
     };
 }
 
-// Tilt efecto para tarjetas de producto (antes inline en Blade)
+//  efecto para tarjetas de producto
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.product-tilt-card').forEach(card => {
         const tooltip = card.querySelector('.tooltip-product-card');
@@ -116,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Carrusel de miniaturas y Lightbox
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Carrusel principal ---
+    // Carrusel principal
     const thumbs = document.getElementById('carousel-thumbs');
     const btnLeft = document.getElementById('carousel-left');
     const btnRight = document.getElementById('carousel-right');

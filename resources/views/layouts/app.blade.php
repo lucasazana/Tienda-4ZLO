@@ -27,28 +27,38 @@
 {{-- fondo negro y fuente definida --}}
 <body class="antialiased bg-black flex flex-col min-h-screen font-rajdhani">
 
-    {{-- navbar fijo con fondo borroso --}}
-    <nav id="main-navbar" class="sticky top-0 z-50 bg-black/70 backdrop-blur-x1 shadow mt-10">
-        <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center rounded-xl bg-black/70 shadow-lg border border-softgreen-700">
+    <!-- Navbar responsive con hamburguesa (Tailwind + Alpine.js) -->
+    <nav class="sticky top-0 z-50 shadow mt-10" x-data="{ open: false }">
+        <div :class="open ? 'backdrop-blur-2xl bg-black/80' : 'bg-black/70 backdrop-blur'" class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between rounded-xl shadow-lg border border-softgreen-700 transition-all duration-300">
+            <!-- Logo -->
             <a href="{{ url('/') }}" class="flex items-center">
-                <img src="{{ asset('img/logo.webp') }}" alt="logo de 4zlo tienda vintage y streetwear" class="h-16 w-auto filter grayscale-0 contrast-200 brightness-110 drop-shadow-md" loading="lazy">
+                <img src="{{ asset('img/logo.webp') }}" alt="logo de 4zlo tienda vintage y streetwear" class="h-12 w-auto md:h-16 filter grayscale-0 contrast-200 brightness-110 drop-shadow-md" loading="lazy">
             </a>
-            <nav class="flex items-center space-x-10">
-                <a href="{{ url('/') }}" class="navbar-link-blanco relative after:content-[''] after:block after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">Inicio</a>
+            <!-- Botón hamburguesa (solo visible en móvil/tablet) -->
+            <div class="sm:hidden">
+                <button @click="open = !open" :aria-expanded="open ? 'true' : 'false'" aria-controls="main-menu" aria-label="Abrir menú" class="flex flex-col justify-center items-center w-10 h-10 rounded focus:outline-none focus:ring-2 focus:ring-softgreen-400 transition group">
+                    <span aria-hidden="true" class="block w-7 h-0.5 bg-softgreen-400 rounded transition-all duration-300" :class="open ? 'rotate-45 translate-y-2' : ''"></span>
+                    <span aria-hidden="true" class="block w-7 h-0.5 bg-softgreen-400 rounded mt-1.5 transition-all duration-300" :class="open ? 'opacity-0' : ''"></span>
+                    <span aria-hidden="true" class="block w-7 h-0.5 bg-softgreen-400 rounded mt-1.5 transition-all duration-300" :class="open ? '-rotate-45 -translate-y-2' : ''"></span>
+                </button>
 
-                <a href="{{ url('/productos') }}" class="navbar-link-blanco relative after:content-[''] after:block after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">Productos</a>
-                @auth
-                    @if(auth()->user() && auth()->user()->name === '4zlo')
-                        <a href="{{ route('dashboard') }}" class="navbar-link-blanco relative after:content-[''] after:block after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">Nuevo producto</a>
+                <!-- Menú móvil -->
+                <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-4" class="absolute left-0 top-0 w-full min-h-screen bg-black/95 z-50 flex flex-col items-center justify-center gap-8 text-xl px-4 py-10">
 
-                        <a href="{{ route('admin.productos.panel') }}" class="navbar-link-blanco relative after:content-[''] after:block after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">Editar productos</a>
-                    @endif
-                    <form method="POST" action="{{ route('logout') }}" class="inline">
-                        @csrf
-                        <button type="submit" class="navbar-link-blanco relative after:content-[''] after:block after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">Cerrar sesión</button>
-                    </form>
-                @endauth
-            </nav>
+                    <!-- Botón cerrar  -->
+                    <button @click="open = false" aria-label="Cerrar menú" class="absolute top-4 right-4 text-5xl md:text-6xl text-softgreen-400 hover:text-red-500 focus:text-red-500 focus:outline-none focus:ring-2 focus:ring-softgreen-400 transition z-50">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul class="flex flex-col items-center gap-8 w-full mt-8" id="main-menu">
+                        @include('layouts.partials.navbar-items')
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Menú desktop -->
+            <ul class="hidden sm:flex flex-row items-center justify-end gap-6 md:gap-10 text-base font-bold">
+                @include('layouts.partials.navbar-items')
+            </ul>
         </div>
     </nav>
 

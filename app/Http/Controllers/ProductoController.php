@@ -18,7 +18,7 @@ class ProductoController extends Controller
                     $q2->where('estado', 0)
                         ->where(function($q3) {
                             $q3->whereNull('no_disponible_desde')
-                                ->orWhere('no_disponible_desde', '>', now()->subDay());
+                                ->orWhere('no_disponible_desde', '>', now()->subDays(2));
                         });
                 });
         })

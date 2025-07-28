@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="max-w-xl mx-auto py-12">
+<div class="w-full max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto py-6 sm:py-10 px-2 sm:px-6 md:px-8">
     @if(session('success'))
         <div class="mb-6 p-4 bg-green-500 text-black rounded shadow text-center font-bold border border-green-400">
             {{ session('success') }}
@@ -11,7 +11,7 @@
     <h2 class="text-2xl font-bold mb-8 text-green-400">Agregar nuevo producto</h2>
     <div id="success-message" class="mb-6 p-4 bg-green-500 text-black rounded shadow text-center font-bold border border-green-400 hidden"></div>
     <div id="error-message" class="mb-6 p-4 bg-red-500 text-black rounded shadow text-center font-bold border border-red-400 hidden"></div>
-    <form id="producto-form" action="{{ route('admin.productos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-black/90 p-8 rounded-xl border border-green-900 shadow-lg">
+    <form id="producto-form" action="{{ route('admin.productos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-black/90 p-4 sm:p-6 md:p-8 rounded-xl border border-green-900 shadow-lg">
         @csrf
 
         <div>
@@ -78,10 +78,9 @@
         </div>
 
         <div class="pt-4">
-            <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded transition-all duration-200 uppercase tracking-widest border border-green-400">Publicar producto</button>
+            <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded transition-all duration-200 uppercase tracking-widest border border-green-400 text-base sm:text-lg">Publicar producto</button>
         </div>
     </form>
 
-    {{-- JS centralizado en resources/js/app.js --}}
 </div>
 @endsection

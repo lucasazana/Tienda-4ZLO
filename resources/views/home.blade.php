@@ -27,7 +27,7 @@
         </p>
     </div>
     <div class="w-full max-w-7xl mx-auto mb-8">
-        <div class="productos-grid mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto">
             @foreach($productos->take(8) as $producto)
                 <x-product-card :producto="$producto" />
             @endforeach

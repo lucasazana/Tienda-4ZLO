@@ -7,55 +7,113 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# 4ZLO - Catálogo de Ropa Vintage & Streetwear
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![Laravel](https://img.shields.io/badge/Laravel-10.x-red?style=flat-square&logo=laravel)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.x-38bdf8?style=flat-square&logo=tailwindcss)
+![Livewire](https://img.shields.io/badge/Livewire-3.x-blue?style=flat-square&logo=laravel)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-Image%20Storage-blue?style=flat-square&logo=cloudinary)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Descripción
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+4ZLO es una tienda online de ropa americana vintage y streetwear, desarrollada con Laravel, Tailwind CSS, Livewire y Alpine.js. Permite a los administradores gestionar productos, imágenes y disponibilidad, y a los usuarios explorar, reservar y comprar prendas únicas.
 
-## Learning Laravel
+## Características principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Catálogo de productos totalmente responsivo
+- Vista de detalle con galería y lightbox
+- Panel de administración para crear, editar y eliminar productos
+- Subida de imágenes a Cloudinary
+- Eliminación automática de productos no disponibles tras 2 días
+- Estilos modernos con Tailwind y animaciones
+- Botón de WhatsApp para reservas rápidas
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tecnologías utilizadas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laravel 10+
+- Tailwind CSS 3+
+- Livewire
+- Alpine.js
+- Cloudinary (almacenamiento de imágenes)
+- MySQL/SQLite
 
-## Laravel Sponsors
+## Instalación
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. Clona el repositorio:
 
-### Premium Partners
+   ```bash
+   git clone https://github.com/tuusuario/4zlo.git
+   cd 4zlo
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. Instala dependencias:
 
-## Contributing
+   ```bash
+   composer install
+   npm install && npm run build
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Copia y configura tu archivo `.env`:
 
-## Code of Conduct
+   ```bash
+   cp .env.example .env
+   # Edita las variables de base de datos y Cloudinary
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Genera la clave de la app y ejecuta migraciones:
 
-## Security Vulnerabilities
+   ```bash
+   php artisan key:generate
+   php artisan migrate --seed
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. Inicia el servidor:
 
-## License
+   ```bash
+   php artisan serve
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> **Nota:** Breeze y Livewire ya están instalados y configurados en este proyecto. No es necesario ejecutar `composer require laravel/breeze` ni `composer require livewire/livewire` manualmente. Solo usa `composer install` y `npm install` para tener todo listo.
+
+> Para desarrollo local, usa `npm run dev` para recarga automática de assets. Para producción, usa `npm run build`.
+
+## Automatización de limpieza de productos
+
+El sistema elimina automáticamente los productos marcados como "no disponible" después de 2 días. Para que esto funcione en producción, configura el cron de Laravel:
+
+```
+* * * * * cd /ruta/a/tu/proyecto && php artisan schedule:run >> /dev/null 2>&1
+```
+
+## Despliegue
+
+- Sube el proyecto a tu servidor/hosting
+- Configura el entorno `.env` y el cron
+- Asegúrate de tener PHP, Composer y Node.js instalados
+
+## Stack y enfoque
+
+- Proyecto Laravel sin Breeze, Jetstream ni starter kits: toda la autenticación, panel y lógica fueron hechos a mano para mayor control y personalización.
+- Inspiración visual y de UX en ideas de [reactbits.dev](https://reactbits.dev), adaptadas y extendidas para el stack Laravel + Blade + Tailwind.
+- Componentes y layouts diseñados a medida, sin plantillas externas.
+
+## Créditos y agradecimientos
+
+- [Laravel](https://laravel.com)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Livewire](https://laravel-livewire.com)
+- [Alpine.js](https://alpinejs.dev)
+- [Cloudinary](https://cloudinary.com)
+- Inspiración visual: [reactbits.dev](https://reactbits.dev)
+
+---
+
+MIT
+
+---
+
+¡Gracias por visitar este proyecto! Si tienes dudas, sugerencias o quieres colaborar, abre un issue o pull request.
+
+<!--
+Más detalles, capturas de pantalla y documentación pueden agregarse aquí.
+-->
