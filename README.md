@@ -16,7 +16,7 @@
 
 ## Descripción
 
-4ZLO es una tienda online de ropa americana vintage y streetwear, desarrollada con Laravel, Tailwind CSS, Livewire y Alpine.js. Permite a los administradores gestionar productos, imágenes y disponibilidad, y a los usuarios explorar, reservar y comprar prendas únicas.
+4ZLO es una tienda online de ropa americana vintage y streetwear, desarrollada con Laravel, Tailwind CSS, Livewire y Alpine.js. Permite a los administradores gestionar productos, imágenes y disponibilidad, y a los usuarios explorar, reservar prendas únicas.
 
 ## Características principales
 
@@ -159,6 +159,6 @@ MIT
 > _Este es mi primer proyecto completo en mi carrera como desarrollador. Aunque es sencillo, representa un gran paso en mi aprendizaje y dedicación. ¡Gracias a quienes me apoyaron y a quienes revisen mi trabajo!_
 
 ¡Gracias por visitar este proyecto!
-Desarrollado con dedicación por Lucas ("xeya").
+Desarrollado con dedicación por Lucas (xeya).
 Si tienes dudas, sugerencias o quieres colaborar, no dudes en abrir un issue o pull request.
 ¡Tu feedback y participación son siempre bienvenidos!
