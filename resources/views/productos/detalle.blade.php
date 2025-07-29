@@ -56,7 +56,7 @@
             </div>
             <div class="precio-producto text-2xl sm:text-3xl md:text-4xl mb-6 font-bold text-softgreen-400 drop-shadow text-center md:text-left">S/ {{ number_format($producto->precio, 2) }}</div>
             <div class="text-softgreen-200 text-base sm:text-lg mb-8 leading-relaxed text-center md:text-left">{{ $producto->descripcion }}</div>
-                <a href="https://api.whatsapp.com/send?phone=51934329514&text={{ urlencode('Hola, quisiera reservar este producto: *' . $producto->nombre . '* ' . url()->current()) }}" target="_blank" class="flex items-center justify-center gap-2 w-full max-w-xs mx-auto text-base sm:text-lg py-3 shadow-lg bg-softgreen-500 hover:bg-softgreen-400 text-black font-bold border-2 border-softgreen-400 transition-colors duration-200 rounded-full">
+                <a href="https://api.whatsapp.com/send?phone=519999999999d&text={{ urlencode('Hola, quisiera reservar este producto: *' . $producto->nombre . '* ' . url()->current()) }}" target="_blank" class="flex items-center justify-center gap-2 w-full max-w-xs mx-auto text-base sm:text-lg py-3 shadow-lg bg-softgreen-500 hover:bg-softgreen-400 text-black font-bold border-2 border-softgreen-400 transition-colors duration-200 rounded-full">
                     <i class="fab fa-whatsapp text-2xl"></i>
                     <span class="font-bold text-base">Reserva aquí</span>
                 </a>
