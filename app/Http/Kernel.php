@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http;
+// este archivo organiza los middlewares que se usan en la app, tanto globales como por rutas
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -53,8 +54,8 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        // 'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        // 'noindex' => \App\Http\Middleware\NoIndexMiddleware::class,
+        //'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        //'noindex' => \App\Http\Middleware\NoIndexMiddleware::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // ...otros middlewares de Laravel

@@ -1,3 +1,7 @@
+{{-- panel para registrar un nuevo producto (solo admin) --}}
+@section('head')
+    <meta name="robots" content="noindex, nofollow">
+@endsection
 @extends('layouts.app')
 
 @section('content')

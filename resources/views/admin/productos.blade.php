@@ -1,3 +1,7 @@
+{{-- ver y editar los productos (solo admin) --}}
+@section('head')
+    <meta name="robots" content="noindex, nofollow">
+@endsection
 
 @section('title', 'Panel de administración | 4ZLO')
 @section('meta_description', 'Administra el catálogo de productos de 4ZLO: agrega, edita o elimina prendas vintage y streetwear de manera segura y eficiente.')
@@ -10,7 +14,8 @@
 <div class="max-w-7xl mx-auto px-2 md:px-8 pt-12 pb-8">
     <h2 class="text-2xl font-bold mb-6 text-white">Editar productos</h2>
     <div class="rounded-xl border border-green-900 bg-black/90 shadow-lg">
-        <!-- Desktop Table -->
+
+        <!-- vista en desktop -->
         <table class="hidden md:table min-w-full divide-y divide-green-900">
             <thead class="bg-green-950">
                 <tr>
@@ -48,7 +53,8 @@
                 @endforeach
             </tbody>
         </table>
-        <!-- Mobile Cards -->
+
+        <!-- vista en mobile -->
         <div class="md:hidden flex flex-col gap-4 p-2">
             @foreach($productos as $producto)
             <div class="bg-black border border-green-900 rounded-xl shadow p-4 flex flex-col gap-2">

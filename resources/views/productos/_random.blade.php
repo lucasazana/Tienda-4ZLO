@@ -1,3 +1,4 @@
+{{-- muestra productos random debajo de acceder a los detalles de un producto--}}
 @if($randomProductos->count())
 <div class="w-full mt-6">
 <div class="w-full max-w-7xl mx-auto px-2 md:px-8 pt-12 pb-8 text-center flex flex-col items-center">

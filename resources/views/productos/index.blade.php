@@ -1,4 +1,4 @@
-
+{{-- catalogo de productos lo ve cualquier usuario --}}
 @section('title', 'Catálogo de productos | 4ZLO')
 @section('meta_description', 'Explora el catálogo de 4ZLO: ropa vintage, streetwear, cortavientos, casacas, polos y más. Prendas únicas y originales listas para ti. ¡Renueva tu clóset con estilo!')
 @section('og_title', 'Catálogo de productos | 4ZLO')

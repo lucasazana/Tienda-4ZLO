@@ -1,3 +1,7 @@
+{{-- editar los datos de un producto (funcion solo para el admin) --}}
+@section('head')
+    <meta name="robots" content="noindex, nofollow">
+@endsection
 @extends('layouts.app')
 
 @section('content')

@@ -1,17 +1,19 @@
 
-// Confirmación de eliminación de productos solo admin
+// confirmacion de eliminacion de productos (solo para el admin))
 document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.form-eliminar-producto')) {
         document.querySelectorAll('.btn-eliminar').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 const form = btn.closest('form');
                 let nombre = '';
-                // Desktop: buscar en la fila de la tabla
+
+                // busca la fila de la tabla en desktop
                 const tr = form.closest('tr');
                 if (tr && tr.querySelector('.admin-productos-nombre')) {
                     nombre = tr.querySelector('.admin-productos-nombre').textContent.trim();
                 } else {
-                    // Mobile: buscar en la tarjeta
+
+                    // busta la tarjeta de producto en mobile
                     const card = form.closest('.flex.flex-col.bg-black');
                     if (card) {
                         const nombreDiv = card.querySelector('.text-green-400');
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Envío AJAX del formulario de producto en dashboard (antes inline en Blade)
+// envio ajax del formulario de producto en dashboard
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('producto-form');
     const successDiv = document.getElementById('success-message');
@@ -128,10 +130,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Carrusel de miniaturas y Lightbox
+// carrusel de miniaturas y lightbox
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Carrusel principal
+    // carrusel principal
     const thumbs = document.getElementById('carousel-thumbs');
     const btnLeft = document.getElementById('carousel-left');
     const btnRight = document.getElementById('carousel-right');
@@ -158,7 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => thumbsImgs[idx].classList.remove('slide-right'), 450);
                 }
             }
-            // Imagen del medio
+
+            // imagen del medio
             let middleIdx;
             if (thumbsImgs.length === 1) {
                 middleIdx = 0;
@@ -196,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Lightbox
+    // lightbox
     const lightbox = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxThumbs = document.getElementById('lightbox-thumbs');
@@ -208,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
             lightboxImg.src = thumbsImgs[idx].src;
             currentIdx = idx;
 
-            // Limpiar y renderizar imagenes
+            // limpiar y renderizar imagenes
             lightboxThumbs.innerHTML = '';
             thumbsImgs.forEach((img, i) => {
                 const thumb = document.createElement('img');
@@ -228,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         mainImg.addEventListener('click', function() {
 
-            // Buscar el indice de la imagen principal actual
+            // buscar el indice de la imagen principal actual
             const idx = thumbsImgs.findIndex(img => img.src === mainImg.src);
             openLightbox(idx >= 0 ? idx : 0);
         });

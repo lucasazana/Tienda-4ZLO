@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*  Navbar blanco migrado a Tailwind en Blade */
-
-/*----------------------------------------------------------------------------------------------------------*/
 
 /* modal de confirmacion al eliminar algun producto para el admin */
 .modal-eliminar-overlay {
@@ -62,9 +59,7 @@
     border: none;
 }
 
-/*----------------------------------------------------------------------------------------------------------*/
-
-/* Detalle producto: imagen principal y lightning effect */
+/* detalle del producto */
 .img-main-container {
     position: relative;
     width: 100%;
@@ -94,19 +89,17 @@
     transition: all 0.2s;
 }
 
-/* Custom tracking for tightest letter spacing */
+/* espaciado de letras */
 .tracking-tightest {
     letter-spacing: 0.02em;
 }
 
-/* Rajdhani font utility */
+/* fuente de letra */
 .font-rajdhani {
     font-family: 'Rajdhani', sans-serif;
 }
 
-/*---------------------------------------------------------------------------------------------------------*/
-
-/* Scrollbar personalizado */
+/* scrollbar personalizado */
 ::-webkit-scrollbar {
     width: 12px;
     background: #181818;
@@ -128,53 +121,54 @@ html {
     scrollbar-width: thin;
 }
 
-/* Animación de desvanecimiento para las imágenes del carrusel */
+/* animacion para las imagenes del carrusel */
 .carousel-fade {
-  animation: carouselFade 0.4s cubic-bezier(0.4,0,0.2,1);
+    animation: carouselFade 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 @keyframes carouselFade {
-  0% {
+    0% {
     opacity: 0;
     filter: blur(2px);
-  }
-  100% {
+    }
+    100% {
     opacity: 1;
     filter: blur(0);
-  }
+    }
 }
 
-/* Animaciones de slide para las miniaturas del carrusel al cambiar con flechas */
+/* animacion de slide para el carrusel al cambiar con flechas */
 .carousel-thumb {
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 .carousel-thumb.slide-left {
-  animation: slideLeftThumb 0.4s;
+    animation: slideLeftThumb 0.4s;
 }
 .carousel-thumb.slide-right {
-  animation: slideRightThumb 0.4s;
+    animation: slideRightThumb 0.4s;
 }
 @keyframes slideLeftThumb {
-  0% {
+    0% {
     transform: translateX(40px);
     opacity: 0.5;
-  }
-  100% {
+    }
+    100% {
     transform: translateX(0);
     opacity: 1;
-  }
+    }
 }
 @keyframes slideRightThumb {
-  0% {
+    0% {
     transform: translateX(-40px);
     opacity: 0.5;
-  }
-  100% {
+    }
+    100% {
     transform: translateX(0);
     opacity: 1;
-  }
+    }
 }
 
+/* modal de lightbox para imagenes (zoom) */
 #lightbox-modal {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }

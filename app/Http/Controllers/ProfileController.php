@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+//  este controlador es para todo lo del perfil del usuario (editar, actualizar, borrar)
 class ProfileController extends Controller
 {
     /**

@@ -1,4 +1,4 @@
-
+{{-- pagina principal, aqui se muestran los productos destacados y la bienvenida --}}
 @section('title', '4ZLO | Tienda online de ropa vintage y streetwear en Perú')
 @section('meta_description', 'Bienvenido a 4ZLO, tu destino para encontrar ropa vintage, streetwear y prendas originales de los 90s. Descubre colecciones únicas, moda urbana y retro, con envíos a todo el Perú.')
 @section('og_title', '4ZLO | Ropa vintage y streetwear en Perú')

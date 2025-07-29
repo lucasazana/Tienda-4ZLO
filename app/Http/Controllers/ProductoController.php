@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    // controlador para manejar todo lo de productos (mostrar, crear, editar, eliminar)
+
+    // muestra la lista de productos en la pagina principal
     public function index()
     {
         $productos = Producto::where(function($q) {
@@ -23,21 +24,19 @@ class ProductoController extends Controller
                 });
         })
         ->inRandomOrder()
-        ->paginate(12); // 3 filas de 4 productos
+        ->paginate(12);
         return view('productos.index', compact('productos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    // muestra el formulario para crear un nuevo producto (aqui deberia ir la vista de creacion)
     public function create()
     {
         return view('dashboard');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+    // guarda un nuevo producto en la base de datos
     public function store(Request $request)
     {
 
@@ -69,7 +68,6 @@ class ProductoController extends Controller
             'estado_ropa' => $request->estado_ropa,
             'precio' => $request->precio,
             'estado' => $request->estado,
-            // imagen_url se asignará después de subir la primera imagen
         ]);
 
         $imagenesUrls = [];
@@ -98,25 +96,25 @@ class ProductoController extends Controller
                     'orden' => $i,
                 ]);
             }
-            // Guardar la primera imagen como principal en el campo imagen_url
+
+            // guardar la primera imagen como principal en el campo imagen_url
             if (count($imagenesUrls) > 0) {
                 $producto->imagen_url = $imagenesUrls[0];
                 $producto->save();
             }
         }
 
-        // Si la petición es AJAX, devolver JSON
+        // ji la petición es ajax devuelve json
         if ($request->ajax()) {
             return response()->json(['success' => true, 'message' => 'Producto creado correctamente.']);
         }
-        // Si no es AJAX, comportamiento tradicional
+
+        // si no es ajax cinserva su comportamiento tradicional
         return redirect()->route('admin.productos.panel')
             ->with('success', 'Producto creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // muestra cards aleatorias de productos al interactuar con los detalles de un producto
     public function show(Producto $producto)
     {
         $randomProductos = Producto::where('id', '!=', $producto->id)
@@ -127,17 +125,13 @@ class ProductoController extends Controller
         return view('productos.detalle', compact('producto', 'randomProductos'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // muestra el formulario para editar un producto
     public function edit(Producto $producto)
     {
         return view('productos.edit', compact('producto'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // actualiza un producto existente
     public function update(Request $request, Producto $producto)
     {
         $request->validate([
@@ -156,7 +150,7 @@ class ProductoController extends Controller
             'nombre', 'descripcion', 'medida', 'talla', 'categoria', 'estado_ropa', 'precio', 'estado'
         ]);
 
-        // Si se sube una nueva imagen, procesarla y subir a Cloudinary
+        // si se sube una nueva imagen procesarla y subir a cloudinary
         if ($request->hasFile('imagen')) {
             $uploadedFile = $request->file('imagen');
             $cloudinary = new \Cloudinary\Cloudinary([
@@ -170,7 +164,8 @@ class ProductoController extends Controller
                 'folder' => 'productos',
                 'resource_type' => 'image',
             ]);
-            // Obtener la URL en webp usando transformación de Cloudinary
+
+            // obtiener la url de la imagen subida y lo convertir a webp con cloudinary
             if (isset($result['public_id'])) {
                 $publicId = $result['public_id'];
                 $data['imagen_url'] = $cloudinary->image($publicId . '.webp')->toUrl();
@@ -179,7 +174,7 @@ class ProductoController extends Controller
             }
         }
 
-        // Guardar o limpiar la fecha de no disponible
+        // actualizar el estado del producto
         if ($request->estado == 0 && !$producto->no_disponible_desde) {
             $data['no_disponible_desde'] = now();
         } elseif ($request->estado == 1) {
@@ -191,16 +186,14 @@ class ProductoController extends Controller
         return redirect()->route('admin.productos.panel')->with('success', 'Producto actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // elimina un producto existente
     public function destroy(Producto $producto)
     {
-        // Eliminar imágenes asociadas en la base de datos
+        // eliminar imágenes asociadas
         if (method_exists($producto, 'imagenes')) {
             $producto->imagenes()->delete();
         }
-        // Eliminar el producto
+        // eliminar el producto
         $producto->delete();
         return redirect()->route('admin.productos.panel')->with('success', 'Producto eliminado correctamente.');
     }

@@ -6,10 +6,11 @@ use Illuminate\Console\Command;
 use App\Models\Producto;
 use Carbon\Carbon;
 
+// elimina productos que han estado no disponibles por más de 48 horas
 class EliminarProductosNoDisponibles extends Command
 {
     protected $signature = 'productos:eliminar-no-disponibles';
-    protected $description = 'Elimina productos marcados como no disponibles hace más de 24 horas';
+    protected $description = 'Elimina productos marcados como no disponibles hace más de 48 horas';
 
     public function handle()
     {
@@ -20,7 +21,8 @@ class EliminarProductosNoDisponibles extends Command
 
         $total = 0;
         foreach ($productos as $producto) {
-            // Eliminar imágenes asociadas
+
+            // eliminar las imagenes asociadas
             if (method_exists($producto, 'imagenes')) {
                 $producto->imagenes()->delete();
             }
