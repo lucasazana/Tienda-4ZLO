@@ -79,7 +79,7 @@
     <footer class="bg-black mt-24 border-t border-softgreen-700 shadow-inner">
         <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col items-center">
             <div class="flex space-x-7 mb-6">
-                <a href="https://wa.me/5199999999" target="_blank" class="group text-softgreen-400 hover:text-softgreen-300 text-2xl transition-all duration-200" aria-label="WhatsApp">
+                <a href="https://wa.me/51999999999" target="_blank" class="group text-softgreen-400 hover:text-softgreen-300 text-2xl transition-all duration-200" aria-label="WhatsApp">
                     <span class="inline-block bg-softgreen-900/60 rounded-full p-3 group-hover:bg-softgreen-400/20 transition-all duration-200">
                         <i class="fab fa-whatsapp"></i>
                     </span>
