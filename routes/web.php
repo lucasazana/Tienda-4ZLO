@@ -6,13 +6,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
-// rutas principales de la app tanto publicas como del admin
+// rutas principales 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/productos/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
-
-Route::middleware(['auth'])->prefix('jaal-4zlo-panel')->group(function () {
+// rutas para el administrador
+Route::middleware(['auth'])->prefix('jaal-4zlo-panel')->group(function () { // ruta para acceder al panel de login
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
